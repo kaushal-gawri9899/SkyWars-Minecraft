@@ -8,6 +8,7 @@ import org.jpwilliamson.arena.command.ArenaCommandGroup;
 import org.jpwilliamson.arena.model.dm.DeathmatchArena;
 import org.jpwilliamson.arena.model.eggwars.EggWarsArena;
 import org.jpwilliamson.arena.model.monster.MobArena;
+import org.jpwilliamson.arena.model.skyWars.SkyWarsArena;
 import org.jpwilliamson.arena.model.team.ctf.CaptureTheFlagArena;
 import org.jpwilliamson.arena.model.team.tdm.TeamDeathmatchArena;
 import org.jpwilliamson.arena.settings.Settings;
@@ -50,7 +51,8 @@ public final class ArenaPlugin extends SimplePlugin {
 		ArenaManager.registerArenaType(TeamDeathmatchArena.class);
 		ArenaManager.registerArenaType(CaptureTheFlagArena.class);
 		ArenaManager.registerArenaType(EggWarsArena.class);
-		ArenaManager.registerArenaType(BuildBattleArena.class);
+		ArenaManager.registerArenaType(SkyWarsArena.class);
+		//ArenaManager.registerArenaType(BuildBattleArena.class);
 	}
 
 	/**

@@ -180,17 +180,17 @@ public class ClassSelectionMenu extends MenuPagged<ArenaClass> {
 				CompSound.ENDERDRAGON_WINGS.play(player);
 
 				System.out.println("Arena type" + arena.getType());
-				if(arena.getType().equalsIgnoreCase("buildBattle")) {
-					System.out.println("Voting reached");
-					//VoteMenu.openVoteMenu((BuildBattleArena) arena, null, player);
-					BuildBattleArena buildArena = (BuildBattleArena)arena;
-					buildArena.getVoteMenu().openVoteMenu(buildArena,null);
-					buildArena.getVoteMenu().openInventory(player);
-					//voteMenu.openVoteMenu((BuildBattleArena)arena, null,player);
-					System.out.println("Voting done");
-				}
+//				if(arena.getType().equalsIgnoreCase("buildBattle")) {
+//					System.out.println("Voting reached");
+//					//VoteMenu.openVoteMenu((BuildBattleArena) arena, null, player);
+//					BuildBattleArena buildArena = (BuildBattleArena)arena;
+//					buildArena.getVoteMenu().openVoteMenu(buildArena,null);
+//					buildArena.getVoteMenu().openInventory(player);
+//					//voteMenu.openVoteMenu((BuildBattleArena)arena, null,player);
+//					System.out.println("Voting done");
+//				}
 					//new VoteMenu((BuildBattleArena)arena, null, player);
-				else
+				//else
 				restartMenu("&2Assigned class " + arenaClass.getName() + "!");
 			}
 		} else
