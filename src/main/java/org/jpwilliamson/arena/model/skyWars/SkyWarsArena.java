@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.EnderChest;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -14,6 +15,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.jpwilliamson.arena.menu.SkyWarsChestMenu;
 import org.jpwilliamson.arena.model.ArenaPlayer;
 import org.jpwilliamson.arena.model.ArenaScoreboard;
 import org.jpwilliamson.arena.menu.EggWarsVillagerMenu;
@@ -195,8 +197,8 @@ public class SkyWarsArena extends Arena {
 	protected void onEntityClick(Player player, Entity clicked, PlayerInteractAtEntityEvent event) {
 		super.onEntityClick(player, clicked, event);
 
-		if (clicked instanceof Villager){
-
+		if (clicked instanceof EnderChest){
+			SkyWarsChestMenu.openPurchaseMenu(this, player);
 		}
 			//EggWarsVillagerMenu.openPurchaseMenu(this, player);
 
@@ -232,46 +234,46 @@ public class SkyWarsArena extends Arena {
 		final Player crystalOwner = Bukkit.getPlayer(getEntityTag(victim, Constants.Tag.TEAM_CRYSTAL));
 		final ArenaPlayer crystalOwnerCache = findPlayer(crystalOwner);
 
-		if (attackerCache.equals(crystalOwnerCache)) {
-			Messenger.error(attacker, "You cannot damage your own crystal!");
-
-		}
-		else {
-			int damage = getNumericEntityTag(victim, Constants.Tag.CRYSTAL_DAMAGE, 0);
-			final int threshold = 10;
-
-			if (++damage >= threshold) {
-				victim.remove();
-				broadcastWarn(crystalOwner.getName() + "'s egg got destroyed!");
-				event.setCancelled(true);
-				returnHandled();
-			}
-
-			// Broadcast every second hit only
-			if (damage % 2 == 0) {
-				for (final Player otherPlayer : getPlayersInAllModes()) {
-					if (otherPlayer.equals(attacker)) {
-						Messenger.info(otherPlayer, Common.format("Damaged %s's egg! (%s/%s)", crystalOwner.getName(), damage, threshold));
-						CompSound.ANVIL_LAND.play(otherPlayer);
-
-						continue;
-					}
-
-					if (otherPlayer.equals(crystalOwner)) {
-						Messenger.info(otherPlayer, Common.format("&eYour egg got damaged! (%s/%s)", damage, threshold));
-
-						CompSound.SUCCESSFUL_HIT.play(otherPlayer);
-
-					} else
-						Messenger.info(otherPlayer, Common.format("%s's crystal just got damaged! (%s/%s)", crystalOwner.getName(), damage, threshold));
-				}
-			}
-
-			setNumericEntityTag(victim, Constants.Tag.CRYSTAL_DAMAGE, damage);
-		}
-
-		event.setCancelled(true);
-		returnHandled();
+//		if (attackerCache.equals(crystalOwnerCache)) {
+//			Messenger.error(attacker, "You cannot damage your own crystal!");
+//
+//		}
+//		else {
+//			int damage = getNumericEntityTag(victim, Constants.Tag.CRYSTAL_DAMAGE, 0);
+//			final int threshold = 10;
+//
+//			if (++damage >= threshold) {
+//				victim.remove();
+//				broadcastWarn(crystalOwner.getName() + "'s egg got destroyed!");
+//				event.setCancelled(true);
+//				returnHandled();
+//			}
+//
+//			// Broadcast every second hit only
+//			if (damage % 2 == 0) {
+//				for (final Player otherPlayer : getPlayersInAllModes()) {
+//					if (otherPlayer.equals(attacker)) {
+//						Messenger.info(otherPlayer, Common.format("Damaged %s's egg! (%s/%s)", crystalOwner.getName(), damage, threshold));
+//						CompSound.ANVIL_LAND.play(otherPlayer);
+//
+//						continue;
+//					}
+//
+//					if (otherPlayer.equals(crystalOwner)) {
+//						Messenger.info(otherPlayer, Common.format("&eYour egg got damaged! (%s/%s)", damage, threshold));
+//
+//						CompSound.SUCCESSFUL_HIT.play(otherPlayer);
+//
+//					} else
+//						Messenger.info(otherPlayer, Common.format("%s's crystal just got damaged! (%s/%s)", crystalOwner.getName(), damage, threshold));
+//				}
+//			}
+//
+//			setNumericEntityTag(victim, Constants.Tag.CRYSTAL_DAMAGE, damage);
+//		}
+//
+//		event.setCancelled(true);
+//		returnHandled();
 	}
 
 	/**
