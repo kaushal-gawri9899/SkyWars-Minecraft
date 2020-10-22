@@ -2,6 +2,7 @@ package org.jpwilliamson.arena.model.skyWars;
 
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 import org.jpwilliamson.arena.model.ArenaSettings;
 import org.jpwilliamson.arena.model.dm.DeathmatchSettings;
@@ -27,31 +28,19 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	/**
 	 * The shop items
 	 */
-	private List<ShopItem> shopItems;
+	private List<CustomItem> shopItems;
 
 	/**
-	 * List of all egg locations
+	 * Represents where to spawn chests
 	 */
-	//private LocationList eggs;
+	private LocationList chests;
 
-	/**
-	 * Represents where to spawn villages
-	 */
-	private LocationList villagers;
+	private Location arenaLocation;
 
-	/**
-	 * Represents iron spawners locations
-	 */
 	private LocationList iron;
 
-	/**
-	 * Represents gold spawners locations
-	 */
 	private LocationList gold;
 
-	/**
-	 * Represents diamond spawners locations
-	 */
 	private LocationList diamonds;
 
 	/**
@@ -62,7 +51,6 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	public SkyWarsSettings(final SkyWarsArena arena) {
 		super(arena);
 	}
-
 	/**
 	 * @see ArenaSettings#onLoadFinish()
 	 */
@@ -70,12 +58,13 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	protected void onLoadFinish() {
 		super.onLoadFinish();
 
-		this.shopItems = getList("Shop_Items", ShopItem.class, this);
+		this.shopItems = getList("Shop_Items", CustomItem.class, this);
 		//this.eggs = getLocations("Eggs");
-		this.villagers = getLocations("Villagers");
+		this.chests = getLocations("Chests");
 		this.iron = getLocations("Iron");
 		this.gold = getLocations("Gold");
 		this.diamonds = getLocations("Diamonds");
+		this.arenaLocation = getLocation("SkyWars_Arena");
 	}
 
 	/**
@@ -85,14 +74,14 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	 * @param item
 	 */
 	public void setItem(int slot, ItemStack item) {
-		ShopItem newItem = slot < shopItems.size() ? shopItems.get(slot) : null;
+		CustomItem newItem = slot < shopItems.size() ? shopItems.get(slot) : null;
 
 		if (item == null)
 			newItem = null;
 
 		else {
 			if (newItem == null)
-				newItem = new ShopItem(this, item, 1, ItemCurrency.IRON);
+				newItem = new CustomItem(this, item, 1, ItemCurrency.IRON);
 			else
 				newItem.item = item;
 		}
@@ -115,7 +104,7 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	public void setPrice(int slot, int price, ItemCurrency currency) {
 		Valid.checkBoolean(slot < shopItems.size(), "Cannot set price for non existing item!");
 
-		final ShopItem item = shopItems.get(slot);
+		final CustomItem item = shopItems.get(slot);
 
 		item.price = price;
 		item.currency = currency;
@@ -130,7 +119,7 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	 * @param slot
 	 * @return
 	 */
-	public ShopItem getItem(int slot) {
+	public CustomItem getItem(int slot) {
 		return slot < shopItems.size() ? shopItems.get(slot) : null;
 	}
 
@@ -140,12 +129,12 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	@Override
 	public boolean isSetup() {
 		return super.isSetup()
-				//&& eggs.size() >= getMaxPlayers()
-				&& villagers.size() > 0
+				&& chests.size() > 0
 				&& iron.size() > 0
 				&& gold.size() > 0
 				&& diamonds.size() > 0;
 	}
+
 
 	/**
 	 * @see ArenaSettings#serialize()
@@ -155,9 +144,8 @@ public class SkyWarsSettings extends DeathmatchSettings {
 		final SerializedMap map = super.serialize();
 
 		map.putArray(
-				"Shop_Items", shopItems,
-			//	"Eggs", eggs,
-				"Villagers", villagers,
+				"Custom_Items", shopItems,
+				"Chests", chests,
 				"Iron", iron,
 				"Gold", gold,
 				"Diamonds", diamonds);
@@ -171,7 +159,7 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	@Getter
 	@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 	@AllArgsConstructor(access = AccessLevel.PRIVATE)
-	public final static class ShopItem implements ConfigSerializable {
+	public final static class CustomItem implements ConfigSerializable {
 
 		/**
 		 * The parent class
@@ -243,8 +231,8 @@ public class SkyWarsSettings extends DeathmatchSettings {
 		 * @param settings
 		 * @return
 		 */
-		public static ShopItem deserialize(SerializedMap map, SkyWarsSettings settings) {
-			final ShopItem item = new ShopItem(settings);
+		public static CustomItem deserialize(SerializedMap map, SkyWarsSettings settings) {
+			final CustomItem item = new CustomItem(settings);
 
 			item.item = map.getItem("Item");
 			item.price = map.getInteger("Price");

@@ -235,15 +235,14 @@ public class SkyWarsArena extends Arena {
 		if (attackerCache.equals(crystalOwnerCache)) {
 			Messenger.error(attacker, "You cannot damage your own crystal!");
 
-		} else {
+		}
+		else {
 			int damage = getNumericEntityTag(victim, Constants.Tag.CRYSTAL_DAMAGE, 0);
 			final int threshold = 10;
 
 			if (++damage >= threshold) {
 				victim.remove();
-
 				broadcastWarn(crystalOwner.getName() + "'s egg got destroyed!");
-
 				event.setCancelled(true);
 				returnHandled();
 			}
@@ -333,7 +332,6 @@ public class SkyWarsArena extends Arena {
 	private void checkLastStanding() {
 		if (getPlayers(ArenaJoinMode.PLAYING).size() == 1 && !isStopping()) {
 			final Player winner = getPlayers(ArenaJoinMode.PLAYING).get(0);
-
 			leavePlayer(winner, ArenaLeaveReason.LAST_STANDING);
 		}
 	}

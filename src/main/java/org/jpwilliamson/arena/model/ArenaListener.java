@@ -404,9 +404,6 @@ public final class ArenaListener implements Listener {
 				event.setCancelled(true);
 		}
 
-//		if(cache.getArena() instanceof BuildBattleArena && VoteMenu.getMenu(player)!=null){
-//			event.setCancelled(true);
-//		}
 
 		ItemStack item = event.getCurrentItem();
 		if(item!=null){
@@ -418,6 +415,7 @@ public final class ArenaListener implements Listener {
 					SpinRewardMenu.updateState(cache.getPlayer());
 					count++;
 				}
+				player.getInventory().addItem(SpinRewardMenu.getItemAtCentre());
 			}
 		}
 	}

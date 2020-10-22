@@ -1,5 +1,6 @@
 package org.jpwilliamson.arena.menu;
 
+import org.jetbrains.annotations.Nullable;
 import org.jpwilliamson.arena.model.skyWars.SkyWarsArena;
 import org.mineacademy.fo.menu.Menu;
 import org.bukkit.Bukkit;
@@ -128,6 +129,13 @@ public class SpinRewardMenu extends Menu {
 				spinInventory.setItem(val,new ItemStack(stack));
 			}
 		}
+	}
+
+	public static ItemStack getItemAtCentre(){
+		if(spinInventory.getItem(23)!=null)
+		return spinInventory.getItem(23);
+		else
+			return ItemCreator.of(CompMaterial.DIAMOND_SWORD, "Click to spin", "Get Your Reward!").build().make();
 	}
 
 	public void openSpinMenu(SkyWarsArena arena)

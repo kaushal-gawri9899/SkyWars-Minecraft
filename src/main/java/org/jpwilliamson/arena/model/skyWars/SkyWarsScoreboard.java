@@ -22,8 +22,8 @@ public class SkyWarsScoreboard extends ArenaScoreboard
 
 		message = Replacer.of(message).replaceAll(
 				"spawnpoints", settings.getEntrances().size(),
-				"eggs", settings.getEggs().size(),
-				"villagers", settings.getVillagers().size(),
+				//"eggs", settings.getEggs().size(),
+				"chests", settings.getChests().size(),
 				"iron", settings.getIron().size(),
 				"gold", settings.getGold().size(),
 				"diamonds", settings.getDiamonds().size());
@@ -38,8 +38,8 @@ public class SkyWarsScoreboard extends ArenaScoreboard
 	protected void addEditRows() {
 		addRows(
 				"Player spawnpoints: {spawnpoints}",
-				"Egg locations: {eggs}",
-				"Villagers: {villagers}",
+				//"Egg locations: {eggs}",
+				"Chests Locations: {chests}",
 				"Iron spawners: {iron}",
 				"Gold spawners: {gold}",
 				"Diamond spawners: {diamonds}");

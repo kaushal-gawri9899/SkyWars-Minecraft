@@ -919,14 +919,7 @@ public abstract class Arena {
 	protected void onBlockBreak(Player player, Block block, BlockBreakEvent event) {
 		if(ArenaPlayer.getCache(event.getPlayer()).hasArena()){
 
-			if(ArenaPlayer.getCache(event.getPlayer()).getMode().equals(ArenaJoinMode.PLAYING) &&
-					ArenaPlayer.getCache(event.getPlayer()).getArena().getType().equalsIgnoreCase("buildbattle")) {
-				BuildBattleArena arena = (BuildBattleArena) ArenaPlayer.getCache(event.getPlayer()).getArena();
-				if(arena.buildBlocks.contains(event.getBlock().getBlockData())){
-					arena.buildBlocks.remove(event.getBlock().getBlockData());
-					return;
-				}
-			}
+
 		}
 		handleBlockInteraction(player, block, event);
 	}

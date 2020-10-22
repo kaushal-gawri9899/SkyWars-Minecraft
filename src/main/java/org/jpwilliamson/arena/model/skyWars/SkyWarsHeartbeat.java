@@ -55,6 +55,9 @@ public class SkyWarsHeartbeat extends ArenaHeartbeat {
 					"Diamond",
 					"",
 					"Use this to buy the best items!"));
+
+		if (elapsedSeconds%30 == 0)
+			dropItems(settings.getChests(), ItemCreator.of(CompMaterial.ENDER_CHEST, "Reward Chest", "Click it to get Items"));
 	}
 
 //	/*
