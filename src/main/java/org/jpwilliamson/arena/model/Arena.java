@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -24,6 +25,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.metadata.MetadataValue;
 import org.jpwilliamson.arena.menu.ClassSelectionMenu;
 //import org.jpwilliamson.arena.menu.ModeMenu;
+import org.jpwilliamson.arena.menu.SpinRewardMenu;
+import org.jpwilliamson.arena.model.skyWars.SkyWarsArena;
 import org.jpwilliamson.arena.model.team.TeamArena;
 import org.jpwilliamson.arena.tool.ArenaTool;
 import org.jpwilliamson.arena.tool.ToolSpectatePlayers;
@@ -334,7 +337,9 @@ public abstract class Arena {
 //						}
 //
 //				}
-				// Open team menu if any
+				// Open team menu if
+				SkyWarsArena buildArena = (SkyWarsArena) this;
+
 				if (hasTeams() && !ArenaTeam.getTeams().isEmpty()) {
 					Valid.checkBoolean(this instanceof TeamArena, "Only TeamArena has support for teams! Remove hasTeams() from " + getClass() + " now");
 
@@ -343,6 +348,16 @@ public abstract class Arena {
 					// Open his menu if any
 				} else if (hasClasses() && !ArenaClass.getClasses().isEmpty())
 					ClassSelectionMenu.openSelectMenu(player, this);
+//				else if (buildArena.getType().equalsIgnoreCase("skywars")){
+//					//SpinRewardMenu spinMenu = new SpinRewardMenu((SkyWarsArena) this);
+//					//spinMenu.openSpinMenu(player);
+//					Bukkit.broadcastMessage("This is skywars");
+//					SpinRewardMenu.openSpinMenu((SkyWarsArena)this);
+//					SpinRewardMenu.openSpinInventory(player);
+//				}
+				else{
+
+				}
 
 			} else
 				// If spectating, only show message

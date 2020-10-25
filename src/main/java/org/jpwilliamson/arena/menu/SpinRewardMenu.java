@@ -14,12 +14,13 @@ import org.mineacademy.fo.menu.model.ItemCreator;
 import org.mineacademy.fo.remain.CompMaterial;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpinRewardMenu extends Menu {
 
-	private static List<CompMaterial> randomList;
-	private static List<CompMaterial> rewardList;
+	private static List<CompMaterial> randomList = new ArrayList<CompMaterial>();
+	private static List<CompMaterial> rewardList = new ArrayList<CompMaterial>();
 	private static Inventory spinInventory;
 	private String inventoryTitle = "Spin And Win";
 	private SkyWarsArena arena;
@@ -32,20 +33,23 @@ public class SpinRewardMenu extends Menu {
 	setSize(9*5);
 	setTitle(inventoryTitle);
 	spinInventory = Bukkit.createInventory(null, 9*5,"Spin and Win");
+//	randomList = new ArrayList<CompMaterial>();
+//	rewardList = new ArrayList<CompMaterial>();
 	fillRandomList();
+	createInitialSpinMenu();
 	}
 
-	public void openSpinMenu(Player player){
+	public static void openSpinInventory(Player player){
+
+		//createInitialSpinMenu();
 	player.openInventory(spinInventory);
 	}
 
 
 
+	public static void createInitialSpinMenu(){
 
-
-	public static void createInitialSpinMenu(Player player){
-
-	for(int i=0; i<spinInventory.getSize(); i++)
+	for(int i=0; i<45; i++)
 	{
 		int val = i+1;
 		if((val+1)/2==23)
@@ -138,7 +142,7 @@ public class SpinRewardMenu extends Menu {
 			return ItemCreator.of(CompMaterial.DIAMOND_SWORD, "Click to spin", "Get Your Reward!").build().make();
 	}
 
-	public void openSpinMenu(SkyWarsArena arena)
+	public static void openSpinMenu(SkyWarsArena arena)
 	{
 		new SpinRewardMenu(arena);
 	}

@@ -30,6 +30,7 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	 */
 	private List<CustomItem> shopItems;
 
+	private final SkyWarsArena arena;
 	/**
 	 * Represents where to spawn chests
 	 */
@@ -50,6 +51,7 @@ public class SkyWarsSettings extends DeathmatchSettings {
 	 */
 	public SkyWarsSettings(final SkyWarsArena arena) {
 		super(arena);
+		this.arena = arena;
 	}
 	/**
 	 * @see ArenaSettings#onLoadFinish()
@@ -67,6 +69,10 @@ public class SkyWarsSettings extends DeathmatchSettings {
 		this.arenaLocation = getLocation("SkyWars_Arena");
 	}
 
+	public SkyWarsArena getArena(){
+		return arena;
+
+	}
 	/**
 	 * Set the item at the given slot, overriding the old one, preserving the price
 	 *

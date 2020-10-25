@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.SneakyThrows;
 import org.jpwilliamson.arena.command.ArenaCommandGroup;
+import org.jpwilliamson.arena.model.*;
 import org.jpwilliamson.arena.model.dm.DeathmatchArena;
 import org.jpwilliamson.arena.model.eggwars.EggWarsArena;
 import org.jpwilliamson.arena.model.monster.MobArena;
@@ -12,13 +13,6 @@ import org.jpwilliamson.arena.model.skyWars.SkyWarsArena;
 import org.jpwilliamson.arena.model.team.ctf.CaptureTheFlagArena;
 import org.jpwilliamson.arena.model.team.tdm.TeamDeathmatchArena;
 import org.jpwilliamson.arena.settings.Settings;
-import org.jpwilliamson.arena.model.ArenaClass;
-import org.jpwilliamson.arena.model.ArenaListener;
-import org.jpwilliamson.arena.model.ArenaManager;
-import org.jpwilliamson.arena.model.ArenaPlayer;
-import org.jpwilliamson.arena.model.ArenaReward;
-import org.jpwilliamson.arena.model.ArenaStopReason;
-import org.jpwilliamson.arena.model.ArenaTeam;
 import org.jpwilliamson.arena.task.EscapeTask;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.command.SimpleCommand;
@@ -52,6 +46,7 @@ public final class ArenaPlugin extends SimplePlugin {
 		ArenaManager.registerArenaType(CaptureTheFlagArena.class);
 		ArenaManager.registerArenaType(EggWarsArena.class);
 		ArenaManager.registerArenaType(SkyWarsArena.class);
+		ArenaManager.registerArenaType(TestArena.class);
 		//ArenaManager.registerArenaType(BuildBattleArena.class);
 	}
 

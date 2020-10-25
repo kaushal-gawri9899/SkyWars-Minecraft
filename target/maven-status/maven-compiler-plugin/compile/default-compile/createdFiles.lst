@@ -38,6 +38,7 @@ org\jpwilliamson\arena\model\ArenaHeartbeat.class
 org\jpwilliamson\arena\command\SetPointCommand.class
 org\jpwilliamson\arena\command\TeleportCommand.class
 org\jpwilliamson\arena\model\ArenaScoreboard.class
+org\jpwilliamson\arena\model\TestArena.class
 org\jpwilliamson\arena\menu\SkyWarsChestMenu$1.class
 org\jpwilliamson\arena\model\ArenaLeaveReason.class
 org\jpwilliamson\arena\menu\TeamSelectionMenu$ViewMode.class

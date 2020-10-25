@@ -1,9 +1,11 @@
 package org.jpwilliamson.arena.tool.skywars;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.jpwilliamson.arena.menu.SkyWarsChestMenu;
 import org.jpwilliamson.arena.model.Arena;
+import org.jpwilliamson.arena.model.ArenaPlayer;
 import org.jpwilliamson.arena.model.skyWars.SkyWarsArena;
 import org.jpwilliamson.arena.model.skyWars.SkyWarsSettings;
 import org.jpwilliamson.arena.tool.VisualTool;
@@ -27,9 +29,11 @@ public class ToolChests extends ToolSkyWars {
 
 	@Getter
 	private static final Tool instance = new ToolChests();
-
+	private SkyWarsSettings settings;
 	private ToolChests() {
 		super("Reward Chests", CompMaterial.ENDER_CHEST);
+
+
 	}
 
 	/**
@@ -56,11 +60,33 @@ public class ToolChests extends ToolSkyWars {
 		SkyWarsChestMenu.openEditMenu(arena, player);
 	}
 
-//	/**
+	@Override
+	protected void handleBlockClick(Player player, SkyWarsArena arena, ClickType click, Block block) {
+		//super.handleBlockClick(player, arena, click, block);
+		SkyWarsChestMenu.openEditMenu(arena, player);
+	}
+
+	@Override
+	public boolean hasToolInHand(Player player)
+	{
+
+		//SkyWarsArena arena = player.getArena();
+		//SkyWarsChestMenu.openEditMenu(, player);
+		ArenaPlayer player1 = ArenaPlayer.getCache(player);
+
+		//SkyWarsArena arena = settings.getArena();
+		//SkyWarsChestMenu.openEditMenu((SkyWarsArena) player1.getArena(), player);
+		return super.hasToolInHand(player);
+	}
+
+
+
+	//	/**
 //	 * @see ToolEggWars#getLocations(EggWarsSettings)
 //	 */
 	@Override
 	protected LocationList getLocations(SkyWarsSettings settings) {
+		this.settings = settings;
 		return settings.getChests();
 	}
 }

@@ -16,6 +16,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.jpwilliamson.arena.menu.SkyWarsChestMenu;
+import org.jpwilliamson.arena.menu.SpinRewardMenu;
 import org.jpwilliamson.arena.model.ArenaPlayer;
 import org.jpwilliamson.arena.model.ArenaScoreboard;
 import org.jpwilliamson.arena.menu.EggWarsVillagerMenu;
@@ -32,6 +33,7 @@ import org.mineacademy.fo.Common;
 import org.mineacademy.fo.Messenger;
 import org.mineacademy.fo.Valid;
 import org.mineacademy.fo.model.RandomNoRepeatPicker;
+import org.mineacademy.fo.remain.CompMaterial;
 import org.mineacademy.fo.remain.CompProperty;
 import org.mineacademy.fo.remain.CompSound;
 
@@ -95,6 +97,7 @@ public class SkyWarsArena extends Arena {
 	protected void onStart() {
 		super.onStart();
 
+
 		if (isEdited())
 			return;
 
@@ -102,31 +105,36 @@ public class SkyWarsArena extends Arena {
 		final RandomNoRepeatPicker<Location> locationPicker = RandomNoRepeatPicker.newPicker(Location.class);
 		locationPicker.setItems(getSettings().getEntrances());
 
-//		final List<Location> eggLocations = Common.toList(getSettings().getEggs());
-//
-//		for (final ArenaPlayer arenaPlayer : getArenaPlayersInAllModes()) {
-//			final Player player = arenaPlayer.getPlayer();
-//			final Location location = locationPicker.pickRandom(player);
-//
-//			// Teleport to arena
-//			teleport(player, location);
-//
-//			// Save their location for respawns
-//			setPlayerTag(arenaPlayer, Constants.Tag.ENTRANCE_LOCATION, location);
-//
-//			// Spawn crystal
-//			final Location closestEgg = BlockUtil.findClosestLocation(player.getLocation(), eggLocations);
-//			eggLocations.remove(closestEgg);
-//
-//			final EnderCrystal crystal = closestEgg.getWorld().spawn(closestEgg.clone().add(0.5, 1, 0.5), EnderCrystal.class);
-//			setEntityTag(crystal, Constants.Tag.TEAM_CRYSTAL, player.getName());
-//		}
-//
-//		// Spawn villagers
-//		for (final Location villagerLocation : getSettings().getVillagers()) {
+		//final List<Location> eggLocations = Common.toList(getSettings().getEggs());
+
+		for (final ArenaPlayer arenaPlayer : getArenaPlayersInAllModes()) {
+			final Player player = arenaPlayer.getPlayer();
+			final Location location = locationPicker.pickRandom(player);
+
+			// Teleport to arena
+			teleport(player, location);
+			Bukkit.broadcastMessage("This is skywars");
+			SpinRewardMenu.openSpinMenu(this);
+			SpinRewardMenu.openSpinInventory(player);
+			// Save their location for respawns
+			setPlayerTag(arenaPlayer, Constants.Tag.ENTRANCE_LOCATION, location);
+
+			// Spawn crystal
+			//final Location closestEgg = BlockUtil.findClosestLocation(player.getLocation(), eggLocations);
+			//eggLocations.remove(closestEgg);
+
+			//final EnderCrystal crystal = closestEgg.getWorld().spawn(closestEgg.clone().add(0.5, 1, 0.5), EnderCrystal.class);
+			//setEntityTag(crystal, Constants.Tag.TEAM_CRYSTAL, player.getName());
+		}
+
+		// Spawn villagers
+//		for (final Location villagerLocation : getSettings().getChests()) {
 //			final Villager villager = villagerLocation.getWorld().spawn(villagerLocation.clone().add(0.5, 1, 0.5), Villager.class);
 //
 //			CompProperty.INVULNERABLE.apply(villager, true);
+//		}
+//		for(final Location chestLocation : getSettings().getChests()){
+//			final CompMaterial.ENDER_CHEST chest = chestLocation.getWorld().spawn(chestLocation.clone().add(0.5, 1, 0.5), CompMaterial.class);
 //		}
 	}
 
@@ -137,7 +145,7 @@ public class SkyWarsArena extends Arena {
 	protected void onStop() {
 		super.onStop();
 
-		removeCrystals();
+		//removeCrystals();
 	}
 
 	/*
